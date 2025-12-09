@@ -1,0 +1,256 @@
+:root {
+  --green: #66CB92;
+  --red: #FF9396;
+  --bg-color-1: #FC00FF;
+  --bg-color-2: #00DBDE;
+  --white: #FFFFFF;
+  --light-gray: #F5F5F5;
+  --dark-gray: #333333;
+  --shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', 'Roboto', Arial, sans-serif;
+  background: linear-gradient(135deg, var(--bg-color-1), var(--bg-color-2));
+  min-height: 100vh;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.app-container {
+  width: 100%;
+  max-width: 400px;
+}
+
+.card-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  position: relative;
+}
+
+.flashcard {
+  width: 320px;
+  height: 400px;
+  perspective: 1000px;
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
+.flashcard-inner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.6s ease;
+}
+
+.flashcard.flipped .flashcard-inner {
+  transform: rotateY(180deg);
+}
+
+.flashcard-face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 0;
+  box-shadow: var(--shadow);
+  border: none;
+  background: var(--white);
+  overflow: hidden;
+}
+
+.flashcard-front {
+  background: linear-gradient(135deg, #A8E6CF, #88D8C0);
+  color: var(--dark-gray);
+  text-align: center;
+  padding: 20px;
+}
+
+.flashcard-back {
+  background: var(--white);
+  color: var(--dark-gray);
+  transform: rotateY(180deg);
+  padding: 20px;
+}
+
+.flashcard-header {
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, var(--green), #46B880);
+  color: var(--white);
+  padding: 10px;
+  text-align: center;
+  border-radius: 50%;
+  font-weight: bold;
+  font-size: 20px;
+  margin: -30px auto 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flashcard-question {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 15px;
+  color: var(--dark-gray);
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 20px;
+  text-align: center;
+}
+
+.flashcard-answer {
+  font-size: 16px;
+  line-height: 1.5;
+  text-align: left;
+  width: 100%;
+  padding: 15px;
+  background: var(--light-gray);
+  border-radius: 10px;
+  margin-top: 10px;
+}
+
+.flashcard-actions {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+  width: 100%;
+}
+
+.action-button {
+  background: var(--white);
+  border: none;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  font-size: 12px;
+  color: var(--dark-gray);
+}
+
+.action-button.accept {
+  background: var(--green);
+  color: var(--white);
+}
+
+.action-button.reject {
+  background: var(--red);
+  color: var(--white);
+}
+
+.progress-container {
+  width: 320px;
+  margin: 20px 0;
+  text-align: center;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 10px;
+  background: var(--light-gray);
+  border-radius: 5px;
+  overflow: hidden;
+  margin-bottom: 5px;
+}
+
+.progress-fill {
+  height: 100%;
+  background: var(--green);
+  border-radius: 5px;
+  width: 0%;
+  transition: width 0.3s ease;
+}
+
+.progress-text {
+  font-size: 14px;
+  color: var(--dark-gray);
+  margin-top: 5px;
+}
+
+.bottom-buttons {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  width: 100%;
+  max-width: 400px;
+  justify-content: center;
+}
+
+.bottom-button {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 25px;
+  background: var(--white);
+  color: var(--dark-gray);
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: var(--shadow);
+  width: 100%;
+  max-width: 180px;
+  text-align: center;
+}
+
+.bottom-button.primary {
+  background: linear-gradient(90deg, var(--green), #46B880);
+  color: var(--white);
+}
+
+.bottom-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.bottom-button.add-card {
+  background: var(--green);
+  color: var(--white);
+}
+
+@media (max-width: 600px) {
+  .flashcard {
+    width: 280px;
+    height: 360px;
+  }
+
+  .progress-container {
+    width: 280px;
+  }
+
+  .bottom-buttons {
+    flex-direction: column;
+    width: 90%;
+    max-width: 300px;
+  }
+
+  .bottom-button {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+}
